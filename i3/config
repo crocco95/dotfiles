@@ -111,7 +111,7 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Web"
-set $ws2 "2: IDE"
+set $ws2 "2:- IDE"
 set $ws3 "3: Dev Utils"
 set $ws4 "4: Chat"
 set $ws5 "5: Music"
@@ -191,39 +191,36 @@ bar {
 # bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls (specific for Macbook)
-bindsym XF86MonBrightnessUp exec macbook-lighter-screen --inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec macbook-lighter-screen --dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec macbook-lighter-screen --inc 50 # increase screen brightness
+bindsym XF86MonBrightnessDown exec macbook-lighter-screen --dec 50 # decrease screen brightness
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /home/lorenzocroccolino/scripts/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Set display resolution
-exec "xrandr --output eDP-1 --mode 1920x1200"
-exec "xrandr --output HDMI-3 --left-of eDP-1 --mode 1920x1080"
+exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200 --pos 1920x0 --rotate normal --output HDMI-3 --primary --mode 1920x1080 --pos 0x0 --rotate normal
 
 for_window [class="Chromium"] move to workspace $ws1
 for_window [class="Google-chrome"] move to workspace $ws1
-for_window [class="code-oss"] move to workspace $ws2
+for_window [class="jetbrains-webstorm"] move to workspace $ws2
 for_window [class="Postman"] move to workspace $ws3
 for_window [class="Slack"] move to workspace $ws4
+for_window [class="TelegramDesktop"] move to workspace $ws4
 for_window [class="Spotify"] move to workspace $ws5
 
 exec --no-startup-id code
 exec --no-startup-id chromium
-exec --no-startup-id google-chrome-stable
+exec --no-startup-id webstorm
 exec --no-startup-id slack
+exec --no-startup-id telegram-desktop
 exec --no-startup-id postman
 exec --no-startup-id spotify
 
-exec "echo -e power on | bluetoothctl"
-exec "echo -e connect E0:EB:40:D0:DD:B1 | bluetoothctl"
-exec "echo -e connect E3:77:F9:77:78:83 | bluetoothctl"
-
 # Set the keyboard layout to IT (after BT keyboard connection)
-exec "setxkbmap -layout it"
+exec --no-startup-id setxkbmap -layout it
