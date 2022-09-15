@@ -207,12 +207,11 @@ bar {
 
 exec --no-startup-id xdg-user-dirs-update
 
-for_window [class="Chromium"] move to workspace $ws1
 for_window [class="Google-chrome"] move to workspace $ws1
-for_window [class="jetbrains-webstorm"] move to workspace $ws2
-for_window [class="Postman"] move to workspace $ws3
+# for_window [class="jetbrains-webstorm"] move to workspace $ws2
+for_window [class="Nautilus"] move to workspace $ws3
 for_window [class="Slack"] move to workspace $ws4
-for_window [class="TelegramDesktop"] move to workspace $ws4
+# for_window [class="TelegramDesktop"] move to workspace $ws4
 for_window [class="Spotify"] move to workspace $ws5
 
 exec --no-startup-id code
