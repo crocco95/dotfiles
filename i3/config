@@ -223,9 +223,9 @@ exec --no-startup-id telegram-desktop
 exec --no-startup-id postman
 exec --no-startup-id spotify
 
-# Sreen brightness controls (specific for Macbook)
-bindsym XF86MonBrightnessUp exec macbook-lighter-screen --inc 50 # increase screen brightness
-bindsym XF86MonBrightnessDown exec macbook-lighter-screen --dec 50 # decrease screen brightness
+# Sreen brightness controls (specific for Intel CPU)
+bindsym XF86MonBrightnessUp exec  /usr/bin/brightnessctl -d intel_backlight set +50
+bindsym XF86MonBrightnessDown exec /usr/bin/brightnessctl -d intel_backlight set 50-
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
