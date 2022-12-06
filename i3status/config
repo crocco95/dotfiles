@@ -7,20 +7,22 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-    colors = true
-    interval = 5
-    color_good = "#4C566A" # Light green
-    color_degraded = "#fafe7c" # Light yellow
-    color_bad = "#ff7770" # Light red
+  output_format = "i3bar"
+  colors = true
+  interval = 5
+  color_good = "#A3BE8C" # Light green
+  color_degraded = "#EBCB8B" # Light yellow
+  color_bad = "#BF616A" # Light red
 }
 
+
 # order += "ipv6"
-order += "volume master"
 order += "wireless _first_"
 order += "ethernet _first_"
+order += "volume master"
 order += "battery 0"
 order += "disk /"
-order += "load"
+order += "cpu_usage"
 order += "memory"
 order += "tztime local"
 
@@ -43,25 +45,27 @@ ethernet _first_ {
 }
 
 battery 0 {
-    format = "%status %percentage"
+    format = "Bat. %status %percentage"
     hide_seconds = true
     integer_battery_capacity = true
     last_full_capacity = true
-    status_chr = "+"
-    status_bat = ""
-    status_full = "(Full)"
+    status_chr = "⚡"
+    status_bat = "🔋"
+    status_full = "🔋"
+    low_threshold = 30
+    threshold_type = "percentage"
 }
 
 disk "/" {
-    format = "%avail"
+    format = "Space Available %avail"
 }
 
-load {
-    format = "CPU: %1min"
+cpu_usage {
+    format = "CPU %usage"
 }
 
 memory {
-    format = "Mem %used"
+    format = "RAM %used"
     threshold_degraded = "1G"
     format_degraded = "MEMORY < %available"
 }
