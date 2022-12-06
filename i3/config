@@ -180,9 +180,9 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # class                 border  bground text    indicator child_border
-client.focused          #83CAFA #4C566A #FFFFFF #83CAFA   #4C566A
-client.focused_inactive #4C566A #434C5E #FFFFFF #4C566A   #4C566A
-client.unfocused        #4C4C4C #3B4252 #888888 #292D2E   #222222
+client.focused          #4C566A #4C566A #FFFFFF #83CAFA   #4C566A
+client.focused_inactive #434C5E #434C5E #FFFFFF #4C566A   #4C566A
+client.unfocused        #3B4252 #3B4252 #888888 #292D2E   #222222
 client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
@@ -196,9 +196,9 @@ bar {
     statusline #FFFFFF
     separator  #666666
 
-    focused_workspace  #83CAFA #4C566A #FFFFFF
-    active_workspace   #3C6EB4 #294172 #FFFFFF
-    inactive_workspace #434C5E #3B4252 #AAAAAA
+    focused_workspace  #4C566A #4C566A #FFFFFF
+    active_workspace   #294172 #294172 #FFFFFF
+    inactive_workspace #3B4252 #3B4252 #AAAAAA
     urgent_workspace   #EC69A0 #DB3279 #FFFFFF
     binding_mode       #b691d3 #A07CBC #FFFFFF
   }
@@ -232,5 +232,42 @@ bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# Move workspace between monitors
+# Move workspace to the left monitor 
 bindsym $mod+Tab move workspace to output left
+
+# Move workspace to the right monitor 
+bindsym $mod+Shift+Tab move workspace to output right
+
+# Set the background wallpaper
+exec --no-startup-id ~/.fehbg
+
+## Volume control
+
+# Path to volume control, without trailing slash
+set $volumepath /run/media/lorenzocroccolino/ExternalData/programs/i3-volume
+
+# Command for the status line
+#   ie: i3blocks, i3status
+set $statuscmd i3status
+
+# Signal used to update the status line
+#   i3blocks uses SIGRTMIN+10 by default
+#   i3status uses SIGUSR1 by default
+set $statussig SIGUSR1
+
+# Amount to increase/decrease volume as a percentage
+set $volumestep 5
+
+# alsa-utils settings
+#
+# To configure a default card, see https://www.alsa-project.org/main/index.php/Asoundrc
+#
+# Card number to control.
+#   If not specified, i3-volume will let `amixer` use a default.
+#   List cards: aplay -l
+#set $alsacard 1
+
+# append "-c $alsacard" without quotes to override default card
+# bindsym XF86AudioRaiseVolume exec --no-startup-id $volumepath/volume -an -t $statuscmd -u $statussig up $volumestep
+# bindsym XF86AudioLowerVolume exec --no-startup-id $volumepath/volume -an -t $statuscmd -u $statussig down $volumestep
+# bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -an -t $statuscmd -u $statussig mute
