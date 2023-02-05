@@ -1,0 +1,10 @@
+#client.<class>         <border>  <background>    <text>      <indicator>   <child_border> 
+client.focused          #FFFFFF #4C566A #FFFFFF #83CAFA   #4C566A
+client.focused_inactive #434C5E #434C5E #FFFFFF #4C566A   #4C566A
+client.unfocused        #3B4252 #3B4252 #888888 #292D2E   #222222
+client.urgent           #EC69A0 #DB3279 #FFFFFF #DB3279   #DB3279
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+
+gaps outer 10
+
+output "*" bg /run/media/crocco/ExternalData/pictures/wallpapers/winter/atle-mo-X9QnU-h3X_8-unsplash.jpg fill

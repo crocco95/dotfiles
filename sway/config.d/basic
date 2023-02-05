@@ -1,0 +1,42 @@
+bar {
+	swaybar_command waybar
+}
+
+# Set the keyboard layout to "it"
+input type:keyboard {
+    xkb_layout it
+    xkb_options grp:rctrl_toggle
+}
+
+# Start notification "mako" daemon
+exec mako
+
+# Sreen brightness controls (specific for Intel CPU + wob notification)
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+bindsym XF86MonBrightnessUp exec brightnessctl set +5% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+
+bindsym XF86KbdBrightnessUp exec brightnessctl set +5% -d smc::kbd_backlight | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+bindsym XF86KbdBrightnessDown exec brightnessctl set 5%- -d smc::kbd_backlight | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+
+# Volume controls (wob notification)
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1| awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Move workspace to the left monitor 
+bindsym $mod+Tab move workspace to output left
+
+# Move workspace to the right monitor 
+bindsym $mod+Shift+Tab move workspace to output right
+
+# Setup "wob" to display changes in backlight, volume, etc
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+
+# Take a screenshoot of all monitors using grim
+bindsym $mod+Shift+s exec grim
